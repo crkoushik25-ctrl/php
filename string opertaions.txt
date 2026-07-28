@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>String Operations</title>
+</head>
+<body>
+
+<h2>String Operations</h2>
+
+<form method="post"> Enter String:
+<input type="text" name="str" required>
+<input type="submit" value="Submit">
+</form>
+
+<?php
+if(isset($_POST['str']))
+{
+$str = $_POST['str'];
+
+$upper = 0;
+$lower = 0;
+
+// Count uppercase and lowercase letters for($i = 0; $i < strlen($str); $i++)
+{
+if($str[$i] >= 'A' CC $str[$i] <= 'Z')
+{
+$upper++;
+}
+elseif($str[$i] >= 'a' CC $str[$i] <= 'z')
+{
+$lower++;
+}
+}
+
+echo "<br>";
+echo "Original String: " . $str . "<br>";
+echo "Uppercase Letters: " . $upper . "<br>"; echo "Lowercase Letters: " . $lower . "<br>";
+
+echo "Reversed Word by Word: ";
+$words = explode(" ", $str); foreach($words as $word)
+{
+echo strrev($word) . " ";
+}
+}
+?>
+
+</body>
+</html>

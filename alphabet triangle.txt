@@ -1,0 +1,12 @@
+<?php
+echo "<h2>Three Alphabet Triangle</h2>";
+
+$n = 3;
+
+for ($i = 1; $i <= $n; $i++) {
+    for ($j = 0; $j < $i; $j++) {
+        echo chr(68 + $j) . " ";
+    }
+    echo "<br>";
+}
+?>

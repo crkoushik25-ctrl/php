@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>SORT ARRAY IN ASCENDING ORDER</h2>
+<form method="post">
+ENTER ARRAY ELEMENTS (separated by commas):<br><br>
+<input type="text" name="numbers"
+placeholder="45,12,78,23,9" required><br><br>
+<input type="submit" value="SORT">
+</form>
+
+<?php
+if(isset($_POST['numbers']))
+{
+$input = $_POST['numbers'];
+
+// Convert input string into an array
+$arr = explode(",", $input);
+
+// Remove extra spaces
+$arr = array_map("trim", $arr);
+
+echo "<br><b>INPUT ARRAY:</b> "; foreach($arr as $value)
+{
+echo $value . " ";
+}
+
+sort($arr);
+
+echo "<br><br><b>SORTED ARRAY (Ascending Order):</b> ";
+foreach($arr as $value)
+{
+echo $value . " ";
+}
+}
+?>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<body>
+<h2>SORT ARRAY IN ASCENDING ORDER (Without
+sort())</h2>
+
+<form method="post">
+ENTER ARRAY ELEMENTS (separated by commas):<br><br>
+<input type="text" name="numbers" required>
+<br><br>
+<input type="submit" value="Sort">
+</form>
+
+<?php
+if(isset($_POST['numbers']))
+{
+$input = $_POST['numbers'];
+
+$arr = explode(",", $input);
+
+$arr = array_map("trim", $arr);
+
+echo "<br><b>INPUT ARRAY:</b> "; foreach($arr as $value)
+{
+echo $value . " ";
+}
+
+$count = count($arr);
+
+for($i = 0; $i < $count; $i++)
+{
+for($j = $i + 1; $j < $count; $j++)
+{
+if($arr[$i] > $arr[$j])
+{
+$temp = $arr[$i];
+$arr[$i] = $arr[$j];
+$arr[$j] = $temp;
+}
+}
+}
+
+echo "<br><br><b>SORTED ARRAY (Ascending Order):</b> ";
+foreach($arr as $value)
+{
+echo $value . " ";
+}
+}
+?>
+</body>
+</html>
+

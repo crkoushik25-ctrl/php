@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>Form Validation</title>
+<style> body {
+font-family: Arial;
+background-color: lightblue;
+}
+.container {
+width: 300px; margin: auto; margin-top: 50px;
+background-color: white; padding: 30px;
+border: 1px solid black; border-radius:10px;
+}
+h2 {
+text-align: center;
+}
+input {
+width: 100%; padding: 8px; margin: 5px 0;
+}
+input[type="submit"] {
+background-color: blue; color: white;
+border: none; border-radius:10px;
+}
+.error { color: red;
+}
+.success { color: green;
+text-align: center;
+}
+</style>
+</head>
+
+<body>
+<?php
+$nameErr = $emailErr = $passwordErr = "";
+$success = "";
+
+if($_SERVER["REQUEST_METHOD"]=="POST")
+{
+$valid = true;
+
+if(empty($_POST["name"]))
+{
+$nameErr = "Name is required";
+$valid = false;
+
+}
+if(empty($_POST["email"]))
+{
+$emailErr = "Email is required";
+$valid = false;
+}
+
+if(empty($_POST["password"]))
+{
+$passwordErr = "Password is required";
+$valid = false;
+}
+
+if($valid)
+{
+$success = "Submitted Successfully!";
+}
+}
+?>
+
+<div class="container">
+
+<h2>Registration Form</h2>
+<form method="post"> Name:
+<input type="text" name="name">
+<span class="error"><?php echo $nameErr;
+?></span>
+<br>
+
+Email:
+<input type="email" name="email">
+<span class="error"><?php echo $emailErr;
+?></span>
+<br>
+
+Password:
+<input type="password" name="password">
+<span class="error"><?php echo
+$passwordErr; ?></span>
+
+<br><br>
+
+<input type="submit" value="Submit">
+
+</form>
+
+<br>
+<div class="success">
+<?php echo $success; ?>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+    <style>
+        body{
+            font-family: Arial;
+        }
+        .box{
+            width:350px;
+            margin:auto;
+            padding:20px;
+            border:2px solid black;
+        }
+        input,select{
+            width:100%;
+            padding:5px;
+            margin:5px 0;
+        }
+        h2{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<h2>Student Registration Form</h2>
+
+<div class="box">
+<form action="display.php" method="post">
+
+    <input type="text" name="name" placeholder="Enter Name"
+    pattern="[A-Za-z .]+" title="Only letters, spaces and dot(.) are allowed" required>
+
+    <input type="text" name="roll" placeholder="Enter Roll Number" required>
+
+    <input type="email" name="email" placeholder="Enter Email" required>
+
+    <input type="tel" name="phone" placeholder="Enter 10 Digit Phone Number"
+    pattern="[0-9]{10}" maxlength="10"
+    title="Enter exactly 10 digits" required>
+
+    <select name="course" required>
+        <option value="">Select Course</option>
+        <option>BCA</option>
+        <option>BSc</option>
+        <option>BCom</option>
+    </select>
+
+    <input type="submit" value="Register">
+
+</form>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <style>
+        body{
+            font-family: Arial;
+        }
+        h2{
+            text-align:center;
+        }
+        .box{
+            width:350px;
+            margin:auto;
+            padding:20px;
+            border:2px solid black;
+        }
+        p{
+            margin:10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Details</h2>
+
+<div class="box">
+
+<?php
+
+echo "<p><b>Name:</b> ".$_POST["name"]."</p>";
+
+echo "<p><b>Roll Number:</b> ".$_POST["roll"]."</p>";
+
+echo "<p><b>Email:</b> ".$_POST["email"]."</p>";
+
+echo "<p><b>Phone Number:</b> ".$_POST["phone"]."</p>";
+
+echo "<p><b>Course:</b> ".$_POST["course"]."</p>";
+
+?>
+</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><head>
+<title>String and Math Functions</title>
+<style> body{
+font-family: Arial, sans-serif; background:#f2f2f2;
+}
+.container{
+width:450px; margin:40px auto; background:#fff; padding:20px;
+border:1px solid #ccc; border-radius:8px;
+}
+h2{
+text-align:center; color:#333;
+}
+h3{
+color:#0066cc;
+border-bottom:1px solid #ccc; padding-bottom:5px;
+}
+label{
+font-weight:bold;
+}
+input[type=text], input[type=number]{
+width:100%; padding:8px;
+margin-top:5px; margin-bottom:15px; border:1px solid #999; border-radius:4px; box-sizing:border-box;
+}
+input[type=submit]{ width:100%;
+padding:10px;
+background:#007BFF; color:white;
+border:none; border-radius:4px; cursor:pointer; font-size:16px;
+}
+.result{
+margin-top:20px; background:#f9f9f9; padding:15px;
+border:1px solid #ddd; border-radius:5px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>STRING AND MATH FUNCTIONS</h2>
+<form method="post">
+<label>ENTER STRING:</label>
+<input type="text" name="str">
+<label>ENTER NUMBER 1:</label>
+<input type="number" name="num1" step="any">
+<label>ENTER NUMBER 2:</label>
+<input type="number" name="num2" step="any">
+<label>ENTER NUMBER 3:</label>
+<input type="number" name="num3" step="any">
+<input type="submit" value="SUBMIT">
+</form>
+<?php
+if(isset($_POST['str']))
+{
+$str = $_POST['str'];
+$num1 = $_POST['num1'];
+$num2 = $_POST['num2'];
+$num3 = $_POST['num3']; echo "<div class='result'>";
+echo "<h3>STRING FUNCTIONS</h3>";
+
+echo "ORIGINAL STRING = $str <br>"; echo "LENGTH = " . strlen($str) . "<br>";
+echo "UPPERCASE = " . strtoupper($str) . "<br>"; echo "LOWERCASE = " . strtolower($str) . "<br>"; echo "REVERSE =" . strrev($str) . "<br>";
+echo "WORD COUNT = " . str_word_count($str) .
+"<br>";
+echo "REPLACE 'a' WITH '@'=
+".str_replace("a","@",$str) . "<br>"; echo "FIRST 5 CHARACTERS = " . substr($str,0,5)
+."<br><br>";
+
+echo "<h3>MATH FUNCTIONS</h3>";
+
+echo "SQUARE ROOT OF $num1 = " . sqrt($num1)
+."<br>";
+echo "$num1 POWER $num2 = " . pow($num1,$num2) . "<br>";
+echo "NUMBERS = $num1, $num2, $num3 <br>"; echo "MAXIMUM = " . max($num1,$num2,$num3)
+."<br>";
+echo "MINIMUM = " . min($num1,$num2,$num3)
+."<br>";
+echo "RANDOM NUMBER (1-100) = " . rand(1,100)
+."<br>";
+echo "</div>";
+}
+?>
+</div>
+</body>
+</html>
