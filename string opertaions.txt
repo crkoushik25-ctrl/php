@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>String Operations</title>
+    <title>String Operations</title>
 </head>
 <body>
 
 <h2>String Operations</h2>
 
-<form method="post"> Enter String:
-<input type="text" name="str" required>
-<input type="submit" value="Submit">
+<form method="post">
+    Enter String:
+    <input type="text" name="str">
+    <input type="submit" value="Submit">
 </form>
 
 <?php
-if(isset($_POST['str']))
+if(isset($_POST["str"]))
 {
-$str = $_POST['str'];
+    $str = $_POST["str"];
+    $upper = 0;
+    $lower = 0;
 
-$upper = 0;
-$lower = 0;
+    for($i=0; $i<strlen($str); $i++)
+    {
+        if($str[$i]>='A' && $str[$i]<='Z')
+            $upper++;
 
-// Count uppercase and lowercase letters for($i = 0; $i < strlen($str); $i++)
-{
-if($str[$i] >= 'A' CC $str[$i] <= 'Z')
-{
-$upper++;
-}
-elseif($str[$i] >= 'a' CC $str[$i] <= 'z')
-{
-$lower++;
-}
-}
+        elseif($str[$i]>='a' && $str[$i]<='z')
+            $lower++;
+    }
 
-echo "<br>";
-echo "Original String: " . $str . "<br>";
-echo "Uppercase Letters: " . $upper . "<br>"; echo "Lowercase Letters: " . $lower . "<br>";
+    echo "<br>Original String: ".$str;
+    echo "<br>Uppercase Letters: ".$upper;
+    echo "<br>Lowercase Letters: ".$lower;
 
-echo "Reversed Word by Word: ";
-$words = explode(" ", $str); foreach($words as $word)
-{
-echo strrev($word) . " ";
-}
+    echo "<br>Reversed Words: ";
+    $words = explode(" ", $str);
+
+    foreach($words as $word)
+    {
+        echo strrev($word)." ";
+    }
 }
 ?>
 
