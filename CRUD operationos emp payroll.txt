@@ -1,0 +1,115 @@
+<?php
+
+// Database connection
+$conn = mysqli_connect("localhost", "root", "", "emp");
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Add employee
+if (isset($_POST['add'])) {
+
+    $name = $_POST['name'];
+    $rno = $_POST['rno'];
+    $sal = $_POST['sal'];
+    $city = $_POST['city'];
+
+    $sql = "INSERT INTO emp (name, rno, sal, city)
+            VALUES ('$name', '$rno', '$sal', '$city')";
+
+    mysqli_query($conn, $sql);
+}
+
+// Delete employee
+if (isset($_GET['delete'])) {
+
+    $name = $_GET['delete'];
+
+    $sql = "DELETE FROM emp WHERE name='$name'";
+
+    mysqli_query($conn, $sql);
+}
+
+// Get all employees
+$result = mysqli_query($conn, "SELECT * FROM emp");
+
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Employee Payroll</title>
+</head>
+
+<body>
+
+<h2>Employee Payroll</h2>
+
+<form method="post">
+
+    Name:
+    <input type="text" name="name" required>
+
+    <br><br>
+
+    rno:
+    <input type="number" name="rno" required>
+
+    <br><br>
+
+    sal:
+    <input type="number" name="sal" required>
+
+    <br><br>
+
+    city:
+    <input type="text" name="city" required>
+
+    <br><br>
+
+    <button type="submit" name="add">Add</button>
+
+</form>
+
+<br>
+
+<table border="1" cellpadding="8">
+
+<tr>
+    <th>Name</th>
+    <th>rno</th>
+    <th>sal</th>
+    <th>city</th>
+    <th>Action</th>
+</tr>
+
+<?php while ($row = mysqli_fetch_assoc($result)) { ?>
+
+<tr>
+
+    <td><?php echo $row['name']; ?></td>
+
+    <td><?php echo $row['rno']; ?></td>
+
+    <td><?php echo $row['sal']; ?></td>
+
+    <td><?php echo $row['city']; ?></td>
+
+    <td>
+        <a href="?delete=<?php echo urlencode($row['name']); ?>">
+            Delete
+        </a>
+    </td>
+
+</tr>
+
+<?php } ?>
+
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+<?php
+$collegeName = "PSG College of Arts & Science";
+$location = "Coimbatore, Tamil Nadu";
+$established = "1947";
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $collegeName; ?></title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+        nav {
+            background-color: #222;
+            text-align: center;
+            padding: 12px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #66ccff;
+        }
+
+        .hero {
+            background-color: #0066cc;
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .hero h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+        }
+
+        .section {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .section h2 {
+            color: #003366;
+            margin-bottom: 15px;
+        }
+
+        .courses {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .course {
+            background-color: #eef5ff;
+            padding: 20px;
+            flex: 1;
+            min-width: 200px;
+            border-radius: 6px;
+        }
+
+        .course h3 {
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1><?php echo $collegeName; ?></h1>
+    <p><?php echo $location; ?></p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#about">About</a>
+    <a href="#courses">Courses</a>
+    <a href="#facilities">Facilities</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero">
+    <h2>Welcome to <?php echo $collegeName; ?></h2>
+    <p>Empowering students through quality education and innovation.</p>
+</section>
+
+<div class="container">
+
+    <section class="section" id="about">
+        <h2>About Our College</h2>
+
+        <p>
+            <?php echo $collegeName; ?> is a reputed educational institution
+            located in <?php echo $location; ?>. Established in
+            <?php echo $established; ?>, the college provides quality education
+            and encourages students to develop their academic, technical and
+            extracurricular skills.
+        </p>
+    </section>
+
+    <section class="section" id="courses">
+        <h2>Popular Courses</h2>
+
+        <div class="courses">
+
+            <div class="course">
+                <h3>B.Sc. Information Technology</h3>
+                <p>Learn programming, databases, web development and modern technologies.</p>
+            </div>
+
+            <div class="course">
+                <h3>B.Com</h3>
+                <p>Develop knowledge in accounting, finance, business and commerce.</p>
+            </div>
+
+            <div class="course">
+                <h3>BCA</h3>
+                <p>Build strong skills in computer applications and software development.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="facilities">
+        <h2>Our Facilities</h2>
+
+        <ul>
+            <li>Modern Computer Laboratories</li>
+            <li>Central Library</li>
+            <li>Sports Facilities</li>
+            <li>Smart Classrooms</li>
+            <li>Internet and Wi-Fi Facilities</li>
+            <li>Placement and Training Cell</li>
+        </ul>
+    </section>
+
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+
+        <p><strong>College:</strong> <?php echo $collegeName; ?></p>
+        <p><strong>Location:</strong> <?php echo $location; ?></p>
+        <p><strong>Email:</strong> info@college.edu</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+    </section>
+
+</div>
+
+<footer>
+    <p>&copy; <?php echo date("Y"); ?> <?php echo $collegeName; ?>. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $name = $_POST["name"];
+    $rollno = $_POST["rollno"];
+    $course = $_POST["course"];
+    $email = $_POST["email"];
+
+    $data = "$name|$rollno|$course|$email\n";
+
+    file_put_contents("students.txt", $data, FILE_APPEND);
+
+    echo "Student Registered Successfully";
+}
+?>
+
+<html>
+<head>
+    <title>Student Registration</title>
+</head>
+
+<body>
+
+<h2>STUDENT REGISTRATION</h2>
+
+<form method="post">
+
+    Student Name:
+    <input type="text" name="name">
+    <br><br>
+
+    Roll Number:
+    <input type="text" name="rollno">
+    <br><br>
+
+    Course:
+    <input type="text" name="course">
+    <br><br>
+
+    Email:
+    <input type="text" name="email">
+    <br><br>
+
+    <input type="submit" value="Register">
+
+</form>
+
+<hr>
+
+<h3>Student Records</h3>
+
+<?php
+
+if (file_exists("students.txt")) {
+
+    $records = file("students.txt");
+?>
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>Name</th>
+    <th>Roll Number</th>
+    <th>Course</th>
+    <th>Email</th>
+</tr>
+
+<?php
+
+foreach ($records as $record) {
+
+    $student = explode("|", trim($record));
+
+?>
+
+<tr>
+    <td><?php echo $student[0]; ?></td>
+    <td><?php echo $student[1]; ?></td>
+    <td><?php echo $student[2]; ?></td>
+    <td><?php echo $student[3]; ?></td>
+</tr>
+
+<?php
+}
+?>
+
+</table>
+
+<?php
+} else {
+
+    echo "No student records found";
+
+}
+?>
+
+</body>
+</html>
