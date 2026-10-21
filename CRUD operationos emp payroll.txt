@@ -1,12 +1,12 @@
 <?php
 
-// Database connection
 $conn = mysqli_connect("localhost", "root", "", "emp");
 
-// Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+$message = "";
 
 // Add employee
 if (isset($_POST['add'])) {
@@ -19,55 +19,82 @@ if (isset($_POST['add'])) {
     $sql = "INSERT INTO emp (name, rno, sal, city)
             VALUES ('$name', '$rno', '$sal', '$city')";
 
-    mysqli_query($conn, $sql);
+    if (mysqli_query($conn, $sql)) {
+        $message = "Details Added Successfully";
+    } else {
+        $message = "Error adding details: " . mysqli_error($conn);
+    }
 }
 
-// Delete employee
+// Delete one employee using RNO
 if (isset($_GET['delete'])) {
 
-    $name = $_GET['delete'];
+    $rno = $_GET['delete'];
 
-    $sql = "DELETE FROM emp WHERE name='$name'";
+    $sql = "DELETE FROM emp WHERE rno = '$rno'";
 
-    mysqli_query($conn, $sql);
+    if (mysqli_query($conn, $sql)) {
+
+        if (mysqli_affected_rows($conn) > 0) {
+            header("Location: employee.php?msg=deleted");
+        } else {
+            header("Location: employee.php?msg=notfound");
+        }
+
+        exit;
+
+    } else {
+        $message = "Error deleting details: " . mysqli_error($conn);
+    }
 }
 
-// Get all employees
+// Display deletion message
+if (isset($_GET['msg'])) {
+
+    if ($_GET['msg'] == 'deleted') {
+        $message = "Employee Details Deleted Successfully";
+    } elseif ($_GET['msg'] == 'notfound') {
+        $message = "Employee not found";
+    }
+}
+
+// Fetch employee records
 $result = mysqli_query($conn, "SELECT * FROM emp");
 
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Employee Payroll</title>
 </head>
-
 <body>
 
 <h2>Employee Payroll</h2>
 
+<?php
+if ($message != "") {
+    echo "<p><b>" . htmlspecialchars($message) . "</b></p>";
+}
+?>
+
+<!-- Add Employee Form -->
 <form method="post">
 
     Name:
     <input type="text" name="name" required>
-
     <br><br>
 
-    rno:
+    RNO:
     <input type="number" name="rno" required>
-
     <br><br>
 
-    sal:
+    Salary:
     <input type="number" name="sal" required>
-
     <br><br>
 
-    city:
+    City:
     <input type="text" name="city" required>
-
     <br><br>
 
     <button type="submit" name="add">Add</button>
@@ -76,40 +103,37 @@ $result = mysqli_query($conn, "SELECT * FROM emp");
 
 <br>
 
+<h3>Employee Records</h3>
+
 <table border="1" cellpadding="8">
 
-<tr>
-    <th>Name</th>
-    <th>rno</th>
-    <th>sal</th>
-    <th>city</th>
-    <th>Action</th>
-</tr>
+    <tr>
+        <th>Name</th>
+        <th>RNO</th>
+        <th>Salary</th>
+        <th>City</th>
+        <th>Action</th>
+    </tr>
 
-<?php while ($row = mysqli_fetch_assoc($result)) { ?>
+    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
 
-<tr>
+    <tr>
+        <td><?php echo htmlspecialchars($row['name']); ?></td>
+        <td><?php echo htmlspecialchars($row['rno']); ?></td>
+        <td><?php echo htmlspecialchars($row['sal']); ?></td>
+        <td><?php echo htmlspecialchars($row['city']); ?></td>
 
-    <td><?php echo $row['name']; ?></td>
+        <td>
+            <a href="employee.php?delete=<?php echo urlencode($row['rno']); ?>"
+               onclick="return confirm('Are you sure you want to delete this employee?');">
+                Delete
+            </a>
+        </td>
+    </tr>
 
-    <td><?php echo $row['rno']; ?></td>
-
-    <td><?php echo $row['sal']; ?></td>
-
-    <td><?php echo $row['city']; ?></td>
-
-    <td>
-        <a href="?delete=<?php echo urlencode($row['name']); ?>">
-            Delete
-        </a>
-    </td>
-
-</tr>
-
-<?php } ?>
+    <?php } ?>
 
 </table>
 
 </body>
-
 </html>
